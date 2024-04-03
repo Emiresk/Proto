@@ -1,7 +1,8 @@
 name: proto
-description: "A new Flutter project."
+description: "Prototype project for my car"
 publish_to: 'none'
-version: 0.1.0
+
+version: 0.0.1
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -9,6 +10,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  #Navigation
+  go_router: ^13.2.2
+
+  #Notifications
+  flutter_local_notifications: ^17.0.0
+
+  #For generate sha salt auth key
+  crypto: ^3.0.3
+
+  #For save local data
+  shared_preferences: ^2.2.2
+
+  #Style
+  google_fonts: ^6.2.0
+  image_picker: ^1.0.7
+  cupertino_icons: ^1.0.6
+  cached_network_image: ^3.3.1
+
 
 dev_dependencies:
   flutter_test:

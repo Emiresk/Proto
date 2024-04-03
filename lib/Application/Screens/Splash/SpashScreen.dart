@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
    return Scaffold(
      body: Container(
        color: AppPalette.BLACK,
-       child: Center(
+       child: const Center(
          child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
                      color: AppPalette.WHITE
                  )
              ),
-             const SizedBox(
+             SizedBox(
                height: 2,
              ),
 
@@ -33,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                  )
              ),
 
-             const SizedBox(
+             SizedBox(
                height: 200,
              ),
 

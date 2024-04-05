@@ -29,10 +29,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   cached_network_image: ^3.3.1
   provider: ^6.1.2
+<<<<<<< HEAD
 
 
   easy_localization: ^3.0.5
   uicons: ^1.0.1
+=======
+>>>>>>> edc5758 (.)
 
 
 dev_dependencies:
@@ -43,6 +46,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+<<<<<<< HEAD
     - lib/
     - lib/generated/
     - lib/Application/
@@ -53,4 +57,8 @@ flutter:
     - lib/Application/Screens/
     - lib/Application/Screens/Start/
     - lib/Application/Screens/Splash/
+=======
+    - lib/Application/
+    - lib/Application/Providers/
+>>>>>>> edc5758 (.)
 

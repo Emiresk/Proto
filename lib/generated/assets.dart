@@ -4,6 +4,7 @@ class Assets {
 
   static const String applicationApplication = 'lib/Application/Application.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
+
   static const String libMain = 'lib/main.dart';
   static const String providersAppStateProvider = 'lib/Application/Providers/AppStateProvider.dart';
   static const String providersSplashScreenProvider = 'lib/Application/Providers/SplashScreenProvider.dart';

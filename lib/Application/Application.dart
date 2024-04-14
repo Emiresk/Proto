@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -26,19 +27,19 @@ class _App extends State<Application> {
     _goRouter = CreateAppRouter( _screenProvider );
     
     Future.delayed(
-        Duration ( seconds: 10 ),
+        Duration ( seconds: 2 ),
         () => _screenProvider.StopShowSplash(),
     );
   }
-
-
 
   @override
   Widget build ( BuildContext context ) {
     return MaterialApp.router(
       routerConfig: _goRouter,
       debugShowCheckedModeBanner: true,
-
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
     );
   }
 }

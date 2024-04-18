@@ -42,6 +42,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - lib/
+    - lib/generated/
     - lib/Application/
     - lib/Application/Providers/
+    - lib/Application/Style/
+    - lib/Application/Config/
+    - lib/Application/Router/
+    - lib/Application/Screens/
+    - lib/Application/Screens/Start/
+    - lib/Application/Screens/Splash/
 

@@ -1,4 +1,17 @@
 {
   "startpage_header" : "Hola",
-  "startpage_subheader"  : "Amigo"
+  "startpage_subheader"  : "Amigo",
+
+
+
+
+
+  "setting_page_back" : "Return back",
+  "setting_page_back" : "Return back",
+  "setting_lang" : {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
 }

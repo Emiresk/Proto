@@ -1,4 +1,16 @@
 {
   "startpage_header" : "Привет",
-  "startpage_subheader"  : "Пользователь"
+  "startpage_subheader"  : "Пользователь",
+
+
+
+
+  "setting_page_back" : "Назад",
+  "setting_page_back" : "Return back",
+  "setting_lang" : {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
 }

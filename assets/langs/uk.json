@@ -1,4 +1,17 @@
 {
   "startpage_header" : "Привiт",
-  "startpage_subheader"  : "Користувач"
+  "startpage_subheader"  : "Користувач",
+
+
+
+
+
+  "setting_page_back" : "Повернутися",
+  "setting_page_back" : "Return back",
+  "setting_lang" : {
+    "en": "English",
+    "es": "Español",
+    "ru": "свиняча",
+    "uk": "Солов'їна"
+  }
 }

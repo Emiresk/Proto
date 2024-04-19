@@ -1,4 +1,16 @@
 {
   "startpage_header" : "Hello",
-  "startpage_subheader"  : "User"
+  "startpage_subheader"  : "User",
+
+
+
+
+
+  "setting_page_back" : "Return back",
+  "setting_lang" : {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
 }

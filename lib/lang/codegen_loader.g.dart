@@ -14,21 +14,49 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> ru = {
-  "startpage_header": "Привет",
-  "startpage_subheader": "Пользователь"
-};
-static const Map<String,dynamic> uk = {
-  "startpage_header": "Привiт",
-  "startpage_subheader": "Користувач"
-};
-static const Map<String,dynamic> en = {
+  static const Map<String,dynamic> en = {
   "startpage_header": "Hello",
-  "startpage_subheader": "User"
+  "startpage_subheader": "User",
+  "setting_page_back": "Return back",
+  "setting_lang": {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
 };
 static const Map<String,dynamic> es = {
   "startpage_header": "Hola",
-  "startpage_subheader": "Amigo"
+  "startpage_subheader": "Amigo",
+  "setting_page_back": "Return back",
+  "setting_lang": {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en, "es": es};
+static const Map<String,dynamic> ru = {
+  "startpage_header": "Привет",
+  "startpage_subheader": "Пользователь",
+  "setting_page_back": "Return back",
+  "setting_lang": {
+    "en": "English",
+    "es": "Español",
+    "ru": "Русский",
+    "uk": "Українська"
+  }
+};
+static const Map<String,dynamic> uk = {
+  "startpage_header": "Привiт",
+  "startpage_subheader": "Користувач",
+  "setting_page_back": "Return back",
+  "setting_lang": {
+    "en": "English",
+    "es": "Español",
+    "ru": "свиняча",
+    "uk": "Солов'їна"
+  }
+};
+static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "es": es, "ru": ru, "uk": uk};
 }

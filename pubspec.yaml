@@ -32,6 +32,7 @@ dependencies:
 
 
   easy_localization: ^3.0.5
+  uicons: ^1.0.1
 
 
 dev_dependencies:

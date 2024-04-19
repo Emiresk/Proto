@@ -14,32 +14,32 @@ class SplashScreen extends StatelessWidget {
          child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
-             Text('MY AUTO',
+             Text('ELANTRA CLUB',
                  style: TextStyle(
-                     fontSize: 40,
+                     fontSize: 30,
                      fontWeight: FontWeight.w600,
                      color: AppPalette.WHITE
                  )
              ),
              SizedBox(
-               height: 2,
+               height: 1,
              ),
 
-             Text('garage',
+             Text('',
                  style: TextStyle(
-                     fontSize: 10,
+                     fontSize: 20,
                      fontWeight: FontWeight.w200,
                      color: AppPalette.WHITE
                  )
              ),
 
              SizedBox(
-               height: 200,
+               height: 300,
              ),
 
              Text( 'Loading...',
                  style: TextStyle(
-                     fontSize: 10,
+                     fontSize: 15,
                      fontWeight: FontWeight.w200,
                      color: AppPalette.WHITE
                  )

@@ -1,29 +1,41 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:proto/lang/locale_keys.g.dart';
+import 'package:uicons/uicons.dart';
 
 class StartPageScreen extends StatefulWidget {
    @override
-  EStartPageScreenState createState() => EStartPageScreenState();
+  _StartPageScreenState createState() => _StartPageScreenState();
 }
 
-class EStartPageScreenState extends State<StartPageScreen> {
+class _StartPageScreenState extends State<StartPageScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(onPressed: ()=>{} , icon: const Icon( Icons.icecream ) ),
-            const SizedBox( height: 10.0 ),
+            IconButton(
+                onPressed: () => context.go('/settings'),
+                icon: Icon(UIcons.regularRounded.settings),
+            ),
           ],
+          elevation: 1,
         ),
 
         body: Column(
           children: [
+            SizedBox(height: 20,),
             Center(
-              child: Text (LocaleKeys.startpage_header.tr() + " " + LocaleKeys.startpage_subheader.tr()),
+              child:
+              Text (
+                  LocaleKeys.startpage_header.tr() + " " + LocaleKeys.startpage_subheader.tr()
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
 
             Row(
@@ -49,6 +61,14 @@ class EStartPageScreenState extends State<StartPageScreen> {
                   onPressed: () => context.setLocale( Locale('es')),
                   child: const Text('ES'),
                 ),
+              ],
+            ),
+            SizedBox(height: 50,),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Debug')
               ],
             ),
           ],

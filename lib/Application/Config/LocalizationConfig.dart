@@ -14,7 +14,7 @@ class LocalizationConfig {
   LocalizationConfig._privateConstructor();
 
   final List<Locale> _supportedLocales = const [
-    Locale ('en'),
+    Locale('en'),
     Locale('ru'),
     Locale('uk'),
     Locale('es'),

@@ -24,7 +24,7 @@ dependencies:
   shared_preferences: ^2.2.3
 
   #Style
-  google_fonts: ^6.2.1
+  google_fonts: ^6.2.0
   image_picker: ^1.1.0
   cupertino_icons: ^1.0.8
   cached_network_image: ^3.3.1
@@ -45,7 +45,6 @@ flutter:
     - lib/
     - lib/generated/
     - lib/Application/
-    - lib/Application/Providers/
     - lib/Application/Style/
     - lib/Application/Config/
     - lib/Application/Router/

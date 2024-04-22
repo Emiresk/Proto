@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:proto/Application/Style/Palette.dart';
@@ -16,9 +16,10 @@ class SplashScreen extends StatelessWidget {
            children: [
              Text('ELANTRA CLUB',
                  style: TextStyle(
-                     fontSize: 30,
+                     fontSize: 32,
                      fontWeight: FontWeight.w600,
-                     color: AppPalette.WHITE
+                     color: AppPalette.WHITE,
+
                  )
              ),
              SizedBox(
@@ -37,12 +38,24 @@ class SplashScreen extends StatelessWidget {
                height: 300,
              ),
 
+
              Text( 'Loading...',
                  style: TextStyle(
-                     fontSize: 15,
-                     fontWeight: FontWeight.w200,
+                     fontSize: 20,
+                     fontWeight: FontWeight.w400,
                      color: AppPalette.WHITE
                  )
+             ),
+
+
+             SizedBox(
+               height: 80,
+             ),
+
+
+             CircularProgressIndicator(
+               color: AppPalette.WHITE,
+               semanticsLabel: 'asdasd',
              ),
            ],
          ),

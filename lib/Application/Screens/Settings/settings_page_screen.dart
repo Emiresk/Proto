@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:proto/Application/Config/LocalizationConfig.dart';
-import 'package:proto/lang/locale_keys.g.dart';
+
 import 'package:uicons/uicons.dart';
 
 class SettingsPageScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class _SettingsPageScreenState extends State<SettingsPageScreen> {
 
   List<String> _listLocales = [];
 
-  String _loc = '';
   @override
   Widget build(BuildContext context) {
 
@@ -38,6 +37,16 @@ class _SettingsPageScreenState extends State<SettingsPageScreen> {
               tooltip: "", //TODO: Добавить ключ
               onPressed: () => context.go ('/start'),
           ),
+          
+          actions: [
+            IconButton(
+              icon: Icon(
+                UIcons.regularRounded.user,
+              ),
+              tooltip: "", //TODO: Добавить ключ
+              onPressed: () => context.go( '/userprofile'),
+            ),
+          ],
         ),
 
         body: Container(
@@ -48,7 +57,7 @@ class _SettingsPageScreenState extends State<SettingsPageScreen> {
             children: [
               Row(
                 children: [
-                  Text('Localization'),
+                  Text('Localization'), //TODO: Добавить ключ
                   SizedBox(width: 50,),
 
                   DropdownMenu<String>(

@@ -1,11 +1,24 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
 
 import 'package:proto/Application/Style/Palette.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
+   final screenProvider = Provider.of<SplashScreenNotifier>(context);
+
+   if ( !screenProvider.isSplashScreenVisible ) {
+     Future.delayed(Duration.zero, () {
+       context.go('/start');
+     });
+   }
 
    return Scaffold(
      body: Container(

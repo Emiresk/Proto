@@ -13,6 +13,13 @@ GoRouter CreateAppRouter () => GoRouter(
 
   routes: [
     GoRoute(
+      path: '/',
+      builder: (context, state ) => StartPageScreen(),
+      name: 'Main page ',
+    ),
+
+
+    GoRoute(
       path: '/splash',
       builder: (context, state ) => SplashScreen(),
       name: 'Splash screen page',
@@ -21,7 +28,7 @@ GoRouter CreateAppRouter () => GoRouter(
     GoRoute(
         path: '/start',
         builder: (context, state ) => StartPageScreen(),
-        name: 'Main page',
+        name: 'Start page',
     ),
 
     GoRoute(

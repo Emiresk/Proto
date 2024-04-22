@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proto/Application/Config/LocalizationConfig.dart';
 
-import 'package:proto/Application/Providers/AppStateProvider.dart';
+import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
+
 import 'package:proto/Application/Application.dart';
 
 
@@ -26,7 +27,7 @@ void main() async {
 
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => AppStateProvider() ),
+          ChangeNotifierProvider(create: (context) => SplashScreenNotifier() ),
         ],
         child: Application(),
       ),

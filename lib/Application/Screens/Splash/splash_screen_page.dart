@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
 
    final screenProvider = Provider.of<SplashScreenNotifier>(context);
 
-   if ( !screenProvider.isSplashScreenVisible ) {
+   if ( !Provider.of<SplashScreenNotifier>(context).isSplashScreenVisible ) {
      Future.delayed(Duration.zero, () {
        context.go('/start');
      });

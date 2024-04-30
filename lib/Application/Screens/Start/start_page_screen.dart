@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proto/Application/Router/GoRouterPathCollector.dart';
+
 
 import 'package:proto/lang/locale_keys.g.dart';
+
 import 'package:uicons/uicons.dart';
 
 class StartPageScreen extends StatefulWidget {
@@ -11,6 +15,10 @@ class StartPageScreen extends StatefulWidget {
 }
 
 class _StartPageScreenState extends State<StartPageScreen> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,11 +72,16 @@ class _StartPageScreenState extends State<StartPageScreen> {
               ],
             ),
             SizedBox(height: 50,),
-            Row(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: <Widget>[
-                Text('Debug')
+
+
+                Text ( "Previous page : ${GoRouterPathCollector.GetPreviousPage()}"),
+                SizedBox(height: 50,),
+                Text ( "Current page : ${GoRouterPathCollector.GetCurrentPage()}"),
               ],
             ),
           ],

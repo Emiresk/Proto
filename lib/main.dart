@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proto/Application/Config/LocalizationConfig.dart';
+import 'package:proto/Application/Notifiers/ConnectionCheckNotifier.dart';
 
 import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
 
@@ -28,6 +29,7 @@ void main() async {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => SplashScreenNotifier() ),
+          ChangeNotifierProvider(create: (context) => ConnectionCheckNotifier() ),
         ],
         child: Application(),
       ),

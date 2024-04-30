@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+
 import 'package:go_router/go_router.dart';
+import 'package:proto/Application/Notifiers/ConnectionCheckNotifier.dart';
+
 import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
-
-
 import 'package:proto/Application/Router/Router.dart';
+
+
+
 import 'package:provider/provider.dart';
 
 class Application extends StatefulWidget {
@@ -18,15 +22,19 @@ class Application extends StatefulWidget {
 class _Application extends State<Application> {
   late SplashScreenNotifier _splashScreenNotifier;
 
+  late ConnectionCheckNotifier _connectionCheckNotifier;
+
   late GoRouter _goRouter;
 
   @override
   void initState() {
     super.initState();
-    
-    _goRouter = CreateAppRouter();
 
-    final _splashScreenNotifier = context.read<SplashScreenNotifier>();
+    _splashScreenNotifier = context.read<SplashScreenNotifier>();
+
+    _connectionCheckNotifier = context.read<ConnectionCheckNotifier>();
+    
+    _goRouter = CreateAppRouter(_connectionCheckNotifier);
 
     Future.delayed(Duration ( seconds:  5 ), () {
       _splashScreenNotifier.DisableSplashScreen();
@@ -35,12 +43,13 @@ class _Application extends State<Application> {
 
   @override
   Widget build ( BuildContext context ) {
+
     return MaterialApp.router(
-      routerConfig: _goRouter,
-      debugShowCheckedModeBanner: true,
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
-      locale: context.locale,
+        routerConfig: _goRouter,
+        debugShowCheckedModeBanner: true,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        locale: context.locale,
     );
   }
 }

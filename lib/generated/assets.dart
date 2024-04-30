@@ -8,6 +8,8 @@ class Assets {
   static const String langCodegenLoader.g = 'lib/lang/codegen_loader.g.dart';
   static const String langLocaleKeys.g = 'lib/lang/locale_keys.g.dart';
   static const String libMain = 'lib/main.dart';
+  static const String noInternetConnectionNoInternetConnection = 'lib/Application/Screens/NoInternetConnection/no_internet_connection.dart';
+  static const String notifiersConnectionCheckNotifier = 'lib/Application/Notifiers/ConnectionCheckNotifier.dart';
   static const String notifiersSplashScreenNotifier = 'lib/Application/Notifiers/SplashScreenNotifier.dart';
   static const String routerRouter = 'lib/Application/Router/Router.dart';
   static const String settingsSettingsPageScreen = 'lib/Application/Screens/Settings/settings_page_screen.dart';

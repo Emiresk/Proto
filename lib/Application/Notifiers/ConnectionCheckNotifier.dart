@@ -2,22 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ConnectionCheckNotifier extends ChangeNotifier {
-  bool _isConnected = true;
+  late bool _isConnected = true;
 
   bool get isConnected => _isConnected;
 
+  List<ConnectivityResult> availableType = [
+    ConnectivityResult.wifi,
+    ConnectivityResult.mobile,
+  ];
 
   ConnectionCheckNotifier() {
-    Connectivity().onConnectivityChanged.listen((event) {
-      bool wasConnected = _isConnected;
+    print( "[INIT] Init ConnectionCheckNotifier");
 
-      _isConnected = (event != ConnectivityResult.none);
+    Connectivity().onConnectivityChanged.listen((connectionResult) {
+      print( "[INFO] Change state of ConnectionCheckNotifier to $connectionResult");
 
-      if ( wasConnected != _isConnected ) {
-        print("Connetion state changes");
+      if ( availableType.contains( connectionResult.first ) == true ) {
+        print( "[INFO] Connection is found");
+        changeState ( true );
+      }
 
-        notifyListeners();
+      else {
+        print( "[INFO] Connection has been lost");
+        changeState ( false );
       }
     });
+  }
+
+  void changeState ( bool isConnected ) {
+    _isConnected = isConnected;
+
+    notifyListeners();
   }
 }

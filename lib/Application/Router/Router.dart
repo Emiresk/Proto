@@ -1,40 +1,52 @@
 import 'package:go_router/go_router.dart';
+import 'package:proto/Application/Router/GoRouterObserver.dart';
 
-import 'package:proto/Application/Screens/Start/start_page_screen.dart';
+import 'package:proto/Application/Screens/NoInternetConnection/no_internet_connection.dart';
 import 'package:proto/Application/Screens/Settings/settings_page_screen.dart';
 import 'package:proto/Application/Screens/Splash/splash_screen_page.dart';
+import 'package:proto/Application/Screens/Start/start_page_screen.dart';
 
+GoRouter getRouterConfig () {
 
-GoRouter CreateAppRouter () => GoRouter(
+  const String baseUrl = '/splash';
 
-  debugLogDiagnostics: true,
+  const bool debugModeEnable = true;
 
-  initialLocation: '/splash',
-
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state ) => StartPageScreen(),
-      name: 'Main page ',
-    ),
-
-
+  final List<RouteBase> routes = [
     GoRoute(
       path: '/splash',
       builder: (context, state ) => SplashScreen(),
-      name: 'Splash screen page',
     ),
 
     GoRoute(
-        path: '/start',
-        builder: (context, state ) => StartPageScreen(),
-        name: 'Start page',
+      path: '/',
+      builder: (context, state ) => StartPageScreen(),
     ),
 
     GoRoute(
-        path: '/settings',
-        builder: (context, state ) => SettingsPageScreen(),
-        name: 'Settings page',
+      path: '/start',
+      builder: (context, state ) => StartPageScreen(),
     ),
-  ]
-);
+    
+    GoRoute(
+      path: '/settings',
+      builder: (context, state ) => SettingsPageScreen(),
+    ),
+
+    GoRoute(
+      path: '/no_internet',
+      builder: (context, state ) => NoInternetConnection(),
+    ),
+  ];
+
+  return GoRouter(
+    debugLogDiagnostics: debugModeEnable,
+    initialLocation: baseUrl,
+    routes: routes,
+    observers: [
+      GoRouterObserver()
+    ]
+  );
+}
+
+

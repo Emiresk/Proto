@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:proto/Application/Config/LocalizationConfig.dart';
+import 'package:proto/Application/Router/GoRouterPathCollector.dart';
 
 import 'package:uicons/uicons.dart';
 
@@ -35,9 +36,10 @@ class _SettingsPageScreenState extends State<SettingsPageScreen> {
           leading: IconButton(
               icon: Icon(UIcons.regularRounded.arrow_left),
               tooltip: "", //TODO: Добавить ключ
-              onPressed: () => context.go ('/start'),
+              onPressed: () => context.go (GoRouterPathCollector.GetPreviousPage() ),
           ),
           
+/*
           actions: [
             IconButton(
               icon: Icon(
@@ -47,6 +49,7 @@ class _SettingsPageScreenState extends State<SettingsPageScreen> {
               onPressed: () => context.go( '/userprofile'),
             ),
           ],
+*/
         ),
 
         body: Container(

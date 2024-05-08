@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
-import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
-
-
+import 'package:proto/Application/Router/GoRouterPathCollector.dart';
 import 'package:proto/Application/Router/Router.dart';
 import 'package:provider/provider.dart';
+
+import 'Notifiers/SplashScreenNotifier.dart';
+import 'Notifiers/ConnectionCheckNotifier.dart';
 
 class Application extends StatefulWidget {
   @override
@@ -17,30 +15,46 @@ class Application extends StatefulWidget {
 
 class _Application extends State<Application> {
   late SplashScreenNotifier _splashScreenNotifier;
-
-  late GoRouter _goRouter;
+  late ConnectionCheckNotifier _connectionCheckNotifier;
+  late GoRouter _appRouter;
 
   @override
   void initState() {
     super.initState();
-    
-    _goRouter = CreateAppRouter();
 
-    final _splashScreenNotifier = context.read<SplashScreenNotifier>();
+    _splashScreenNotifier = context.read<SplashScreenNotifier>();
 
-    Future.delayed(Duration ( seconds:  5 ), () {
+    _appRouter = getRouterConfig();
+
+    Future.delayed(const Duration ( seconds:  5 ), () {
       _splashScreenNotifier.DisableSplashScreen();
     });
   }
 
   @override
   Widget build ( BuildContext context ) {
+    
+    final ConnectionCheckNotifier connectionState = Provider.of<ConnectionCheckNotifier>(context);
+
+    if ( connectionState.isConnected == false && (GoRouterPathCollector.GetCurrentPage() != '/no_internet')) {
+      _appRouter.go( '/no_internet' );
+    }
+
+    if ( connectionState.isConnected == true && (GoRouterPathCollector.GetCurrentPage() == '/no_internet')) {
+      if ( GoRouterPathCollector.GetCurrentPage() != null ) {
+        _appRouter.go( GoRouterPathCollector.GetPreviousPage() );
+      }
+      else {
+        _appRouter.go( '/' );
+      }
+    }
+
     return MaterialApp.router(
-      routerConfig: _goRouter,
-      debugShowCheckedModeBanner: true,
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
-      locale: context.locale,
+        routerConfig: _appRouter,
+        debugShowCheckedModeBanner: true,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        locale: context.locale,
     );
   }
 }

@@ -19,10 +19,15 @@ GoRouter getRouterConfig () {
     ),
 
     GoRoute(
-      path: '/start',
+      path: '/',
       builder: (context, state ) => StartPageScreen(),
     ),
 
+    GoRoute(
+      path: '/start',
+      builder: (context, state ) => StartPageScreen(),
+    ),
+    
     GoRoute(
       path: '/settings',
       builder: (context, state ) => SettingsPageScreen(),

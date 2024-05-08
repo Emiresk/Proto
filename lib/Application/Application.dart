@@ -33,10 +33,21 @@ class _Application extends State<Application> {
 
   @override
   Widget build ( BuildContext context ) {
-    //final ConnectionCheckNotifier connectionState = Provider.of<ConnectionCheckNotifier>(context);
-    //_appRouter.go('/no_internet');
+    
+    final ConnectionCheckNotifier connectionState = Provider.of<ConnectionCheckNotifier>(context);
 
-    print( "[INFO] --- ${GoRouterPathCollector.GetCurrentPage()}" );
+    if ( connectionState.isConnected == false && (GoRouterPathCollector.GetCurrentPage() != '/no_internet')) {
+      _appRouter.go( '/no_internet' );
+    }
+
+    if ( connectionState.isConnected == true && (GoRouterPathCollector.GetCurrentPage() == '/no_internet')) {
+      if ( GoRouterPathCollector.GetCurrentPage() != null ) {
+        _appRouter.go( GoRouterPathCollector.GetPreviousPage() );
+      }
+      else {
+        _appRouter.go( '/' );
+      }
+    }
 
     return MaterialApp.router(
         routerConfig: _appRouter,

@@ -4,6 +4,7 @@ class Assets {
 
   static const String applicationApplication = 'lib/Application/Application.dart';
   static const String configLocalizationConfig = 'lib/Application/Config/LocalizationConfig.dart';
+  static const String fuelConverterFuelConverterPage = 'lib/Application/Screens/FuelConverter/fuel_converter_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String langCodegenLoader.g = 'lib/lang/codegen_loader.g.dart';
   static const String langLocaleKeys.g = 'lib/lang/locale_keys.g.dart';
@@ -11,9 +12,9 @@ class Assets {
   static const String noInternetConnectionNoInternetConnection = 'lib/Application/Screens/NoInternetConnection/no_internet_connection.dart';
   static const String notifiersConnectionCheckNotifier = 'lib/Application/Notifiers/ConnectionCheckNotifier.dart';
   static const String notifiersSplashScreenNotifier = 'lib/Application/Notifiers/SplashScreenNotifier.dart';
+  static const String routerGoRouterObserver = 'lib/Application/Router/GoRouterObserver.dart';
+  static const String routerGoRouterPathCollector = 'lib/Application/Router/GoRouterPathCollector.dart';
   static const String routerRouter = 'lib/Application/Router/Router.dart';
-  static const String routerRouterObserver = 'lib/Application/Router/RouterObserver.dart';
-  static const String routerRouterPathCollector = 'lib/Application/Router/RouterPathCollector.dart';
   static const String settingsSettingsPageScreen = 'lib/Application/Screens/Settings/settings_page_screen.dart';
   static const String splashSplashScreenPage = 'lib/Application/Screens/Splash/splash_screen_page.dart';
   static const String startStartPageScreen = 'lib/Application/Screens/Start/start_page_screen.dart';

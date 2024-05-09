@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:proto/lang/locale_keys.g.dart';
+import 'package:proto/Application/Style/Palette.dart';
 
+import 'package:proto/lang/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,10 +13,14 @@ class StartPageScreen extends StatefulWidget {
 }
 
 class _StartPageScreenState extends State<StartPageScreen> {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           actions: [
             IconButton(
@@ -24,6 +29,30 @@ class _StartPageScreenState extends State<StartPageScreen> {
             ),
           ],
           elevation: 1,
+          leading: IconButton(
+            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+            icon: Icon(UIcons.regularRounded.menu_burger),
+          ),
+        ),
+
+        drawer: Drawer(
+          width: 200,
+          child: ListView(
+            children: [
+              ListTile(
+                title: const Text(' '), //TODO Need to add translation
+                onTap: () => {},
+                enabled: false,
+                tileColor: AppPalette.GRAY200,
+              ),
+              ListTile(
+                leading: Icon(UIcons.regularRounded.apps_sort),
+                title: const Text('Fuel Converter'), //TODO Need to add translation
+                onTap: () => context.go('/converter_fuel'),
+                splashColor: AppPalette.ORANGE
+              ),
+            ],
+          ),
         ),
 
         body: Column(

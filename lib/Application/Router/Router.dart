@@ -5,6 +5,7 @@ import 'package:proto/Application/Screens/NoInternetConnection/no_internet_conne
 import 'package:proto/Application/Screens/Settings/settings_page_screen.dart';
 import 'package:proto/Application/Screens/Splash/splash_screen_page.dart';
 import 'package:proto/Application/Screens/Start/start_page_screen.dart';
+import 'package:proto/Application/Screens/FuelConverter/fuel_converter_page.dart';
 
 GoRouter getRouterConfig () {
 
@@ -26,6 +27,11 @@ GoRouter getRouterConfig () {
     GoRoute(
       path: '/start',
       builder: (context, state ) => StartPageScreen(),
+    ),
+
+    GoRoute(
+      path: '/converter_fuel',
+      builder: (context, state ) => FuelConverterPage(),
     ),
     
     GoRoute(

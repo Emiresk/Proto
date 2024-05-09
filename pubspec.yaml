@@ -36,6 +36,7 @@ dependencies:
   connectivity_plus: ^6.0.3
   flutter_bloc: ^8.1.5
 
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

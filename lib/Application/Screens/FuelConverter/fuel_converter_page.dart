@@ -81,7 +81,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
             ),
             Container(
               margin: EdgeInsets.only( top: 25, left: 15,right: 15),
-              height: 350,
+              height: 375,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: AppPalette.WHITE,
@@ -96,75 +96,239 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
               ),
 
               child: Column(
+                children: [
+                  const SizedBox( height: 15,),
 
-              children: [
-                const SizedBox( height: 25,),
-                const Text ("Select source value",
-                  style: TextStyle(
-                  color: AppPalette.PRIMARY,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500),
-                ),
-                const SizedBox( height: 35,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: _dropdownType,
-                        onChanged: (String? newFuelType) => _dropdownType = newFuelType!,
-                        items: _listFuel.map<DropdownMenuItem<String>>((String value){
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Container(
-                              height: 50, // высота элементов списка
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(value),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(5))
+                  const Text ("Fuel eco converter",
+                    style: TextStyle(
+                    color: AppPalette.PRIMARY,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500),
+                  ),
+
+                  const SizedBox( height: 15,),
+
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Text('From', style: TextStyle(fontSize: 15)),
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _dropdownType,
+                                    onChanged: (String? newFuelType) => _dropdownType = newFuelType!,
+                                    items: _listFuel.map<DropdownMenuItem<String>>((String value){
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          height: 50, // высота элементов списка
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          child: Text(value),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(Radius.circular(5))
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    dropdownColor: Colors.white, // цвет фона выпадающего меню
+                                    style: TextStyle(color: Colors.black, fontSize: 18), // стиль текста элементов
+                                    icon: Icon(Icons.arrow_drop_down, color: Colors.black), // иконка раскрытия
+                                    iconSize: 30, // размер иконки
+                                  )
                               ),
                             ),
-                          );
-                        }).toList(),
-                        dropdownColor: Colors.white, // цвет фона выпадающего меню
-                        style: TextStyle(color: Colors.black, fontSize: 18), // стиль текста элементов
-                        icon: Icon(Icons.arrow_drop_down, color: Colors.black), // иконка раскрытия
-                        iconSize: 30, // размер иконки
-                      )
-                    ),
-                    
-                    DropdownMenu<String>(
-                      initialSelection: _listFuel[0],
-                      onSelected: (val) => _type = val!,
-                      dropdownMenuEntries: _listFuel.map<DropdownMenuEntry<String>>((String index){
-                        return DropdownMenuEntry<String>(
-                          value: index,
-                          label: '$index'
-                        );
-                      }).toList(),
+                            SizedBox(width: 15,),
+                            Expanded(
+                              flex: 2,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  fillColor: Colors.grey.shade300,
+                                  filled: true,
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
 
-                    ),
-                    const Text (" TO ",
-                      style: TextStyle(
-                        color: AppPalette.PRIMARY,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
-                    ),
-                    DropdownMenu<String>(
-                      initialSelection: _listFuel[0],
-                      onSelected: (val) => _type = val!,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 25,),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: 300,
+                              child: Divider(  color: Colors.black, thickness: 1, ),
+                            ),
+                            Container(
+                              color: Colors.white, // Цвет фона иконки, чтобы перекрыть разделитель
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Icon(
+                                  UIcons.boldRounded.sort_alt,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 25),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _dropdownType,
+                                    onChanged: (String? newFuelType) => _dropdownType = newFuelType!,
+                                    items: _listFuel.map<DropdownMenuItem<String>>((String value){
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          height: 50, // высота элементов списка
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          child: Text(value),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(Radius.circular(5))
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    dropdownColor: Colors.white, // цвет фона выпадающего меню
+                                    style: TextStyle(color: Colors.black, fontSize: 18), // стиль текста элементов
+                                    icon: Icon(Icons.arrow_drop_down, color: Colors.black), // иконка раскрытия
+                                    iconSize: 30, // размер иконки
+                                  )
+                              ),
+                            ),
+                            SizedBox(width: 15,),
+                            Expanded(
+                              flex: 2,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  fillColor: Colors.grey.shade300,
+                                  filled: true,
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
 
-                      dropdownMenuEntries: _listFuel.map<DropdownMenuEntry<String>>((String index){
-                        return DropdownMenuEntry<String>(
-                          value: index,
-                          label: '$index'
-                        );
-                      }).toList(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+
+                  const SizedBox( height: 15,),
+
+                  Text('Result: '),
+                  /*
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Column(
+                      children: [
+                        Text('Base fuel type'),
+                        SizedBox(height: 20,),
+                        Row (
+                          children: [
+                            Container(
+                              child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _dropdownType,
+                                    onChanged: (String? newFuelType) => _dropdownType = newFuelType!,
+                                    items: _listFuel.map<DropdownMenuItem<String>>((String value){
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          height: 50, // высота элементов списка
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          child: Text(value),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(Radius.circular(5))
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    dropdownColor: Colors.white, // цвет фона выпадающего меню
+                                    style: TextStyle(color: Colors.black, fontSize: 18), // стиль текста элементов
+                                    icon: Icon(Icons.arrow_drop_down, color: Colors.black), // иконка раскрытия
+                                    iconSize: 30, // размер иконки
+                                  )
+                              ),
+                              color: Colors.blueGrey,
+                            ),
+                            Container(
+
+                              child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _dropdownType,
+                                    onChanged: (String? newFuelType) => _dropdownType = newFuelType!,
+                                    items: _listFuel.map<DropdownMenuItem<String>>((String value){
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          height: 50, // высота элементов списка
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          child: Text(value),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(Radius.circular(5))
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    dropdownColor: Colors.white, // цвет фона выпадающего меню
+                                    style: TextStyle(color: Colors.black, fontSize: 18), // стиль текста элементов
+                                    icon: Icon(Icons.arrow_drop_down, color: Colors.black), // иконка раскрытия
+                                    iconSize: 30, // размер иконки
+                                  )
+                              ),
+                              color: Colors.blue,
+                            ),
+
+
+                          ],
+                        ),
+
+
+
+                      ],
+                    ),
+
+                  ),
+                  */
+
+
+                ],
             ),
             ),
           ],

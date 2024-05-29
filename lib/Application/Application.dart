@@ -26,7 +26,7 @@ class _Application extends State<Application> {
 
     _appRouter = getRouterConfig();
 
-    Future.delayed(const Duration ( seconds:  5 ), () {
+    Future.delayed(const Duration ( seconds:  1 ), () {
       _splashScreenNotifier.DisableSplashScreen();
     });
   }

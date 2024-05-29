@@ -4,6 +4,7 @@ class Assets {
 
   static const String applicationApplication = 'lib/Application/Application.dart';
   static const String configLocalizationConfig = 'lib/Application/Config/LocalizationConfig.dart';
+  static const String fuelConverterFuelConsumptionCalculator = 'lib/Application/Screens/FuelConverter/fuel_consumption_calculator.dart';
   static const String fuelConverterFuelConverterPage = 'lib/Application/Screens/FuelConverter/fuel_converter_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String langCodegenLoader.g = 'lib/lang/codegen_loader.g.dart';
@@ -19,5 +20,6 @@ class Assets {
   static const String splashSplashScreenPage = 'lib/Application/Screens/Splash/splash_screen_page.dart';
   static const String startStartPageScreen = 'lib/Application/Screens/Start/start_page_screen.dart';
   static const String stylePalette = 'lib/Application/Style/Palette.dart';
+  static const String widgetsFYInputFormatter = 'lib/Application/Extensions/Widgets/FY_InputFormatter.dart';
 
 }

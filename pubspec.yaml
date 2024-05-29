@@ -37,6 +37,8 @@ dependencies:
   flutter_bloc: ^8.1.5
 
   dropdown_button2: ^2.3.9
+  icons_plus: ^5.0.0
+  flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:

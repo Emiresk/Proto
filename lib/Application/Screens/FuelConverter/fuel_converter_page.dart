@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:proto/Application/Extensions/Widgets/FY_InputFormatter.dart';
+import 'package:proto/Application/Screens/FuelConverter/fuel_consumption_calculator.dart';
 import 'package:uicons/uicons.dart';
 import '../../Router/GoRouterPathCollector.dart';
 
@@ -12,94 +12,73 @@ class FuelConverterPage extends StatefulWidget {
   _FuelConverterPageState createState() => _FuelConverterPageState();
 }
 
+enum TextFieldSelected {nil, US, UK, EU, EUMIX}
+
 class _FuelConverterPageState extends State<FuelConverterPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String _type = '';
-  String _dropdownType = '';
-  List<String> _listFuel = ["US MPG", "UK MPG", "L/100 Km"];
+  final TextEditingController _usMpgController = TextEditingController();
+  final TextEditingController _ukMpgController = TextEditingController();
+  final TextEditingController _l100kmController = TextEditingController();
+  final TextEditingController _kmLController = TextEditingController();
 
-  final Map<String, Map<String, dynamic>> _fuelDataMap = {
-    "us": {
-      "code": "us",
-      "label": "US MPG",
-      "flag": Flag(Flags.united_states_of_america, size: 20,),
-    },
-    "uk": {
-      "code": "uk",
-      "label": "UK MPG",
-      "flag": Flag(Flags.united_kingdom, size: 20,),
-    },
-    "eu": {
-      "code": "eu",
-      "label": "L/100Km",
-      "flag": Flag(Flags.european_union, size: 20,),
-    },
-  };
+  TextFieldSelected _selected = TextFieldSelected.nil;
+  final FuelConsumptionCalculator _converter = FuelConsumptionCalculator();
 
-  final String _mapSelectedKey = 'us';
-
-  double _fuelValue1 = 0;
-  double _fuelValue2 = 0;
-
-  String _fuelType1 = '';
-
-  String _fuelType2 = '';
-
-  late String _selectedValue1;
-  late String _selectedValue2 = '';
-
-  late Flag _icon1;
-
-  late Flag _icon2;
-  final TextEditingController _textController1 = TextEditingController();
-  final TextEditingController _textController2 = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    _selectedValue1 = _fuelDataMap.entries.first.value['label'];
-    _selectedValue2 = _fuelDataMap.entries.last.value['label'];
+    _usMpgController.addListener( (){
 
-    _icon1 = _fuelDataMap.entries.first.value['flag'];
-    _icon2 = _fuelDataMap.entries.last.value['flag'];
+      dynamic val = double.tryParse( _usMpgController.text );
 
-    print("Value _selectedValue1 = {$_selectedValue1}, _selectedValue2 = {$_selectedValue2}");
-
-    _textController1.addListener((){
-      final value = _textController1.text;
-      if ( value.isNotEmpty ) {
-
-        print("Listener");
-
-        final mValue = (double.parse(value) ?? 0) * 1.6 / 1.5;
-        _textController2.text = mValue.toStringAsFixed(2);
+      if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.US ){
+        _ukMpgController.text = _usMpgController.text + " 1";
+        _l100kmController.text = _usMpgController.text + " 2";
+        _kmLController.text = _usMpgController.text + " 3";
       }
     });
 
-    _textController2.addListener((){
-      final value = _textController2.text;
-      if ( value.isNotEmpty ) {
-        final mValue = (double.parse(value) ?? 0) * 1.5 / 1.6;
-        _textController1.text = mValue.toStringAsFixed(2);
+    _ukMpgController.addListener( (){
+
+      dynamic val = double.tryParse( _ukMpgController.text );
+
+      if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.UK ){
+        _usMpgController.text = _ukMpgController.text + " 10";
+        _l100kmController.text = _ukMpgController.text + " 20";
+        _kmLController.text = _ukMpgController.text + " 30";
+      }
+    });
+
+    _l100kmController.addListener( (){
+
+      dynamic val = double.tryParse( _l100kmController.text );
+
+      if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.EU ){
+        _ukMpgController.text = _l100kmController.text + " 5";
+        _usMpgController.text = _l100kmController.text + " 6";
+        _kmLController.text = _l100kmController.text + " 7";
       }
     });
   }
 
+
+
+
   @override
   void dispose() {
-    super.dispose();
+    _usMpgController.dispose();
+    _ukMpgController.dispose();
+    _l100kmController.dispose();
+    _kmLController.dispose();
 
-    _textController1.dispose();
-    _textController2.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    _dropdownType = _listFuel.first;
-
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -129,17 +108,16 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
             ],
           ),
         ),
-
-        body: Stack (
+        body: Stack(
           children: [
             Container (
               height: 150,
               decoration: const BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)
-                )
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(45),
+                      bottomLeft: Radius.circular(45)
+                  )
               ),
             ),
             Container(
@@ -149,199 +127,285 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  boxShadow: [ BoxShadow(
+                boxShadow: [ BoxShadow(
                     color: Colors.black,
                     blurRadius: 10,
                     blurStyle: BlurStyle.outer,
                     offset: Offset(0, 5),
                     spreadRadius: -5
-                  )],
+                )],
               ),
-              child: Column(
+              child: Column (
                 children: [
                   const SizedBox( height: 15,),
-                  const Text ("Fuel eco converter",
+                  const Text ("Fuel consumption converter",
                     style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w500),
+                        color: Colors.blueAccent,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox( height: 25,),
                   Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 25),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Container (
-                                margin: EdgeInsets.only(left: 5),
-                                child: DropdownMenu<String>(
-                                  initialSelection: 'us',
-
-                                  leadingIcon: Container(
-                                    margin: EdgeInsets.only(left: 10, right: 15),
-                                    child: _icon1,
-                                  ),
-
-                                  onSelected: ( String? val ){
-                                    print( "Value ==> {$val}");
-
-                                    setState(() {
-                                      _icon1 = _fuelDataMap[val]?['flag'];
-                                    });
-                                  },
-
-                                  trailingIcon: Icon(Icons.arrow_downward, size: 16,),
-                                  selectedTrailingIcon: Icon(Icons.arrow_upward, size: 16,),
-
-                                  dropdownMenuEntries: _fuelDataMap.keys.map<DropdownMenuEntry<String>>((String val){
-                                    return DropdownMenuEntry(
-                                        value: _fuelDataMap[val]?['code'],
-                                        label: _fuelDataMap[val]?['label'],
-                                        leadingIcon: _fuelDataMap[val]?['flag']
-                                    );
-                                  }).toList(),
-
-                                  width: 220,
-                                  textStyle: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500
-                                  ),
-                                ),
+                      padding: EdgeInsets.only(left: 5, right: 15),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Flag(Flags.united_states_of_america)
                               ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextField(
-                                controller: _textController1,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.grey.shade300,
-                                  filled: true,
-                                  border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                onChanged: (fuelValue) {
-                                  setState(() {
-                                    _fuelValue1 = double.tryParse(fuelValue) ?? 0;
-                                  });
-                                },
+                              Expanded(
+                                  flex: 2,
+                                  child: Text('US MPG')
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 25,),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 300,
-                              child: Divider(  color: Colors.black, thickness: 1, ),
-                            ),
-                            Container(
-                              color: Colors.white, // Цвет фона иконки, чтобы перекрыть разделитель
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Icon(
-                                  UIcons.boldRounded.sort_alt,
-                                  color: Colors.black,
-                                ),
+                              Expanded(
+                                  flex: 3,
+                                  child: TextField(
+                                    controller: _usMpgController,
+                                    keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true,
+                                    ),
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.grey.shade200,
+                                      filled: true,
+                                      suffixText: "MPG",
+                                      suffixStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600
+                                      ),
+                                      border: InputBorder.none,
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                    onTap: () => _selected = TextFieldSelected.US,
+                                  )
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 25),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Container (
-                                margin: EdgeInsets.only(left: 5),
-                                child: DropdownMenu<String>(
-                                  initialSelection: 'eu',
-
-                                  leadingIcon: Container(
-                                    margin: EdgeInsets.only(left: 10, right: 15),
-                                    child: _icon2,
-                                  ),
-
-                                  onSelected: ( String? val ){
-                                    print( "Value ==> {$val}");
-
-                                    setState(() {
-                                      _icon2 = _fuelDataMap[val]?['flag'];
-                                    });
-                                  },
-
-                                  trailingIcon: Icon(Icons.arrow_downward, size: 16,),
-                                  selectedTrailingIcon: Icon(Icons.arrow_upward, size: 16,),
-
-                                  dropdownMenuEntries: _fuelDataMap.keys.map<DropdownMenuEntry<String>>((String val){
-                                    return DropdownMenuEntry(
-                                        value: _fuelDataMap[val]?['code'],
-                                        label: _fuelDataMap[val]?['label'],
-                                        leadingIcon: _fuelDataMap[val]?['flag']
-                                    );
-                                  }).toList(),
-
-                                  width: 220,
-                                  textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                ),
+                            ],
+                          ),
+                          SizedBox(height: 15,),
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Flag(Flags.united_kingdom)
                               ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextField(
-                                controller: _textController2,
-
-                                decoration: InputDecoration(
-                                  fillColor: Colors.grey.shade300,
-                                  filled: true,
-                                  border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                inputFormatters: [FY_InputFormatter()],
-                                onChanged: (fuelValue) {
-                                  setState(() {
-                                    _fuelValue2 = double.tryParse(fuelValue) ?? 0;
-                                  });
-                                },
+                              Expanded(
+                                  flex: 2,
+                                  child: Text('MPG')
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                              Expanded(
+                                  flex: 3,
+                                  child: TextField(
+                                    controller: _ukMpgController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.grey.shade200,
+                                      filled: true,
+                                      suffixText: "MPG",
+                                      suffixStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600
+                                      ),
+                                      border: InputBorder.none,
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                    onTap: () => _selected = TextFieldSelected.UK,
+                                  )
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 15,),
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Flag(Flags.european_union)
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Text('L/100km')
+                              ),
+                              Expanded(
+                                  flex: 3,
+                                  child: TextField(
+                                    controller: _kmLController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.grey.shade200,
+                                      filled: true,
+                                      suffixText: "Litres",
+                                      suffixStyle: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600
+                                      ),
+                                      border: InputBorder.none,
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                    onTap: () => _selected = TextFieldSelected.EU,
+                                  )
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 15,),
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Flag(Flags.european_union)
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Text('Km/L')
+                              ),
+                              Expanded(
+                                  flex: 3,
+                                  child: TextField(
+                                    controller: _l100kmController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.grey.shade200,
+                                      filled: true,
+                                      border: InputBorder.none,
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                      suffixText: "Km/1L",
+                                      suffixStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                    onTap: () => _selected = TextFieldSelected.EU,
+
+                                  )
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                   ),
                 ],
-            ),
+              ),
             ),
           ],
-        ),
+        )
       ),
     );
   }
 }
+
+
+/*
+*
+* Widget buildTextField({
+  required TextEditingController controller,
+  required String suffixText,
+  required VoidCallback onTap,
+  required TextFieldSelected selected,
+}) {
+  return TextField(
+    controller: controller,
+    keyboardType: TextInputType.numberWithOptions(
+      decimal: true,
+    ),
+    decoration: InputDecoration(
+      fillColor: Colors.grey.shade200,
+      filled: true,
+      suffixText: suffixText,
+      suffixStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      ),
+      border: InputBorder.none,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+    ),
+    onTap: onTap,
+  );
+}
+
+*
+*
+*
+*
+Column(
+  children: [
+    buildTextField(
+      controller: _usMpgController,
+      suffixText: "MPG",
+      onTap: () {
+        _selected = TextFieldSelected.US;
+      },
+      selected: _selected,
+    ),
+    SizedBox(height: 15),
+    buildTextField(
+      controller: _ukMpgController,
+      suffixText: "MPG",
+      onTap: () {
+        _selected = TextFieldSelected.UK;
+      },
+      selected: _selected,
+    ),
+    SizedBox(height: 15),
+    buildTextField(
+      controller: _l100kmController,
+      suffixText: "L/100km",
+      onTap: () {
+        _selected = TextFieldSelected.L100KM;
+      },
+      selected: _selected,
+    ),
+    SizedBox(height: 15),
+    buildTextField(
+      controller: _kmLController,
+      suffixText: "Km/L",
+      onTap: () {
+        _selected = TextFieldSelected.KML;
+      },
+      selected: _selected,
+    ),
+  ],
+),
+
+*
+*
+*
+* */

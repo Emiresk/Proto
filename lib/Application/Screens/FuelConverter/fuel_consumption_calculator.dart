@@ -72,11 +72,15 @@ class FuelConsumptionCalculator {
 
 //// KmL ===> ALL
 
-  String fromUsToKmL ( double val ){
-    return ( _kmlToUsMpgMod * val ).toStringAsFixed(2);
+  String fromUsToKmL ( double value ){
+    return ( _kmlToUsMpgMod * value ).toStringAsFixed(2);
   }
 
-  String fromUkToKmL ( double val ){
-    return ( _kmlToUkMpgMod * val ).toStringAsFixed(2);
+  String fromUkToKmL ( double value ){
+    return ( _kmlToUkMpgMod * value ).toStringAsFixed(2);
+  }
+
+  String fromEuToKmL ( double value ){
+    return ( 100 / value ).toStringAsFixed(2);
   }
 }

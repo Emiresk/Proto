@@ -32,35 +32,47 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
 
     _usMpgController.addListener( (){
 
-      dynamic val = double.tryParse( _usMpgController.text );
+      dynamic value = double.tryParse( _usMpgController.text );
 
       if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.US ){
-        _ukMpgController.text = _usMpgController.text + " 1";
-        _l100kmController.text = _usMpgController.text + " 2";
-        _kmLController.text = _usMpgController.text + " 3";
+        _ukMpgController.text = _converter.fromUsToUk(value);
+        _l100kmController.text = _converter.fromUsToEuMix(value);
+        _kmLController.text = _converter.fromUsToKmL(value);
       }
     });
 
     _ukMpgController.addListener( (){
 
-      dynamic val = double.tryParse( _ukMpgController.text );
+      dynamic value = double.tryParse( _ukMpgController.text );
 
       if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.UK ){
-        _usMpgController.text = _ukMpgController.text + " 10";
-        _l100kmController.text = _ukMpgController.text + " 20";
-        _kmLController.text = _ukMpgController.text + " 30";
+        _usMpgController.text = _converter.fromUkToUs(value);
+        _l100kmController.text = _converter.fromUkToEuMix(value);
+        _kmLController.text = _converter.fromUkToKmL(value);
       }
     });
 
     _l100kmController.addListener( (){
 
-      dynamic val = double.tryParse( _l100kmController.text );
+      dynamic value = double.tryParse( _l100kmController.text );
 
       if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.EU ){
-        _ukMpgController.text = _l100kmController.text + " 5";
-        _usMpgController.text = _l100kmController.text + " 6";
-        _kmLController.text = _l100kmController.text + " 7";
+        _ukMpgController.text = _converter.fromUkToEuMix(value);
+        _usMpgController.text = _converter.fromUsToEuMix(value);
+        _kmLController.text = _converter.fromEuToKmL(value);
       }
+    });
+
+
+    _kmLController.addListener( () {
+      dynamic value = double.tryParse( _kmLController.text );
+
+      if ( _selected != TextFieldSelected.nil && _selected == TextFieldSelected.EUMIX ){
+        _usMpgController.text = _converter.fromUkToUs(value);
+        _ukMpgController.text = _converter.fromUsToUk(value);
+        _l100kmController.text = _converter.fromUkToEuMix(value);
+      }
+
     });
   }
 
@@ -111,7 +123,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
         body: Stack(
           children: [
             Container (
-              height: 150,
+              height: 180,
               decoration: const BoxDecoration(
                   color: Colors.blueAccent,
                   borderRadius: BorderRadius.only(
@@ -121,7 +133,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only( top: 25, left: 15,right: 15),
+              margin: const EdgeInsets.only( top: 75, left: 15,right: 15),
               height: 375,
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -156,7 +168,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                   child: Flag(Flags.united_states_of_america)
                               ),
                               Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Text('US MPG')
                               ),
                               Expanded(
@@ -198,7 +210,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                   child: Flag(Flags.united_kingdom)
                               ),
                               Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Text('MPG')
                               ),
                               Expanded(
@@ -215,8 +227,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                           fontWeight: FontWeight.w600
                                       ),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                                      enabledBorder: OutlineInputBorder(
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 15),                                      enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(12),
                                         borderSide: BorderSide.none,
                                       ),
@@ -238,13 +249,13 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                   child: Flag(Flags.european_union)
                               ),
                               Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Text('L/100km')
                               ),
                               Expanded(
                                   flex: 3,
                                   child: TextField(
-                                    controller: _kmLController,
+                                    controller: _l100kmController,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                       fillColor: Colors.grey.shade200,
@@ -265,7 +276,10 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                         borderSide: BorderSide.none,
                                       ),
                                     ),
-                                    onTap: () => _selected = TextFieldSelected.EU,
+                                    onTap: () {
+                                      _selected = TextFieldSelected.EU;
+                                          print( "===> {$_selected}");
+                                      },
                                   )
                               ),
                             ],
@@ -278,13 +292,13 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                   child: Flag(Flags.european_union)
                               ),
                               Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Text('Km/L')
                               ),
                               Expanded(
                                   flex: 3,
                                   child: TextField(
-                                    controller: _l100kmController,
+                                    controller: _kmLController,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                       fillColor: Colors.grey.shade200,
@@ -305,7 +319,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                                         borderSide: BorderSide.none,
                                       ),
                                     ),
-                                    onTap: () => _selected = TextFieldSelected.EU,
+                                    onTap: () => _selected = TextFieldSelected.EUMIX,
 
                                   )
                               ),

@@ -7,8 +7,8 @@ class Assets {
   static const String fuelConverterFuelConsumptionCalculator = 'lib/Application/Screens/FuelConverter/fuel_consumption_calculator.dart';
   static const String fuelConverterFuelConverterPage = 'lib/Application/Screens/FuelConverter/fuel_converter_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
-  static const String langCodegenLoader.g = 'lib/lang/codegen_loader.g.dart';
-  static const String langLocaleKeys.g = 'lib/lang/locale_keys.g.dart';
+  static const String langsCodegenLoader.g = 'lib/langs/codegen_loader.g.dart';
+  static const String langsLocaleKeys.g = 'lib/langs/locale_keys.g.dart';
   static const String libMain = 'lib/main.dart';
   static const String noInternetConnectionNoInternetConnection = 'lib/Application/Screens/NoInternetConnection/no_internet_connection.dart';
   static const String notifiersConnectionCheckNotifier = 'lib/Application/Notifiers/ConnectionCheckNotifier.dart';
@@ -20,6 +20,5 @@ class Assets {
   static const String splashSplashScreenPage = 'lib/Application/Screens/Splash/splash_screen_page.dart';
   static const String startStartPageScreen = 'lib/Application/Screens/Start/start_page_screen.dart';
   static const String stylePalette = 'lib/Application/Style/Palette.dart';
-  static const String widgetsFYInputFormatter = 'lib/Application/Extensions/Widgets/FY_InputFormatter.dart';
 
 }

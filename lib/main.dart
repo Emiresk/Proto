@@ -7,7 +7,7 @@ import 'package:proto/Application/Notifiers/SplashScreenNotifier.dart';
 import 'package:proto/Application/Application.dart';
 
 
-import 'package:proto/lang/codegen_loader.g.dart';
+import 'package:proto/langs/codegen_loader.g.dart';
 
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';

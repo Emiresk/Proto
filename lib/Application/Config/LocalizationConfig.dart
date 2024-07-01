@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'package:proto/lang/codegen_loader.g.dart';
+import 'package:proto/langs/codegen_loader.g.dart';
 
 class LocalizationConfig {
 

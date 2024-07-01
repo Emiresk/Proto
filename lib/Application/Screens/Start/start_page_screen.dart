@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:proto/Application/Style/Palette.dart';
 
-import 'package:proto/lang/locale_keys.g.dart';
+import 'package:proto/langs/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

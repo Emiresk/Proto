@@ -132,9 +132,19 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                   )
               ),
             ),
+            Container (
+              height: 80,
+              alignment: Alignment.center,
+              child: const Text ("Fuel consumption converter",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only( top: 75, left: 15,right: 15),
-              height: 375,
+              height: 285,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -149,13 +159,6 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
               ),
               child: Column (
                 children: [
-                  const SizedBox( height: 15,),
-                  const Text ("Fuel consumption converter",
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 26,
-                        fontWeight: FontWeight.w500),
-                  ),
                   const SizedBox( height: 25,),
                   Padding(
                       padding: EdgeInsets.only(left: 5, right: 15),
@@ -211,7 +214,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
                               ),
                               Expanded(
                                   flex: 1,
-                                  child: Text('MPG')
+                                  child: Text('UK MPG')
                               ),
                               Expanded(
                                   flex: 3,

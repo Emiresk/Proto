@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:proto/Application/Screens/FuelConverter/fuel_consumption_calculator.dart';
+import 'package:proto/langs/locale_keys.g.dart';
 import 'package:uicons/uicons.dart';
 import '../../Router/GoRouterPathCollector.dart';
 
@@ -115,7 +117,7 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
             children: [
               ListTile(
                 leading: Icon(UIcons.regularRounded.arrow_left),
-                title: Text('Return back'),
+                title: Text(LocaleKeys.fuel_converter_back_button.tr()),
                 onTap: () => context.go (GoRouterPathCollector.GetPreviousPage() ),
               ),
             ],
@@ -134,17 +136,22 @@ class _FuelConverterPageState extends State<FuelConverterPage> {
               ),
             ),
             Container (
-              height: 80,
+              height: 70,
               alignment: Alignment.center,
-              child: const Text ("Fuel consumption converter",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w600),
+              child: AutoSizeText(
+                  LocaleKeys.fuel_converter_page_header.tr(),
+textAlign: TextAlign.center,
+                  minFontSize: 13,
+                  maxFontSize: 26,
+                  maxLines: 2,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600)
               ),
             ),
             Container(
-              margin: const EdgeInsets.only( top: 75, left: 15,right: 15),
+              margin: const EdgeInsets.only( top: 85, left: 15,right: 15),
               height: 285,
               width: double.infinity,
               decoration: const BoxDecoration(

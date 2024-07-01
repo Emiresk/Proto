@@ -7,11 +7,13 @@
 
 
   "setting_page_back" : "Повернутися",
-  "setting_page_back" : "Return back",
   "setting_lang" : {
     "en": "English",
     "es": "Español",
     "ru": "свиняча",
     "uk": "Солов'їна"
-  }
+  },
+
+  "fuel_converter_page_header" : "Калькулятор витрати палива",
+  "fuel_converter_back_button" : "Повернутися назад"
 }

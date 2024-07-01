@@ -7,11 +7,14 @@
 
 
   "setting_page_back" : "Return back",
-  "setting_page_back" : "Return back",
+
   "setting_lang" : {
     "en": "English",
     "es": "Español",
     "ru": "Русский",
     "uk": "Українська"
-  }
+  },
+
+  "fuel_converter_page_header" : "Calculadora de consumo de combustible",
+  "fuel_converter_back_button" : "Volver atrás"
 }

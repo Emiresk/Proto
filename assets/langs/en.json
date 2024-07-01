@@ -12,5 +12,10 @@
     "es": "Español",
     "ru": "Русский",
     "uk": "Українська"
-  }
+  },
+
+
+
+  "fuel_converter_page_header" : "Fuel consumption converter",
+  "fuel_converter_back_button" : "Return back"
 }

@@ -6,11 +6,13 @@
 
 
   "setting_page_back" : "Назад",
-  "setting_page_back" : "Return back",
   "setting_lang" : {
     "en": "English",
     "es": "Español",
     "ru": "Русский",
     "uk": "Українська"
-  }
+  },
+
+  "fuel_converter_page_header" : "Калькулятор расхода топлива",
+  "fuel_converter_back_button" : "Вернуться назад"
 }
